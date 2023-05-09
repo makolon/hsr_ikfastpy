@@ -16,6 +16,7 @@ Note: This repository is influenced from the Andy Zeng IKFastPy repository.
 
 
 ## Quick Start
+### Create IK Python Interface
 1. Clone this repository
 ```
 git clone https://github.com/makolon/hsr_ikfast.git
@@ -34,8 +35,40 @@ cd docker
 cd ../
 ./exec_openrave.sh
 ```
+5. Compile the Cython wrapper
+```
+cd ./hsrb_ikfast
+python setup.py
+```
+
+### Simulation Demo
+Run demo in pybullet simulation environment
+```
+cd ./examples/simulation
+python test_hsr.py 
+```
+
+### Real Demo
+RUn demo in Real HSR
+```
+cd ./examples/real
+python ik_controller.py
+```
 
 ## Modifying Robot Kinematics with OpenRave
+1. (Optional) Debug the kinematics using OpenRave's viewer
+```
+openrave wrapper.xml
+```
 
+2. (Optional) Check the links in your file
+```
+openrave-robot.py hsrb4s.dae --info links
+```
+3. Use OpenRave to re-generate the IKFast C++ code `ikfast61.cpp`
+```
+./exec_openrave.sh
+```
+You can choose `--iktype` in `exec_openrave.sh` from the list of ik types described in this [document](http://openrave.org/docs/latest_stable/openravepy/ikfast/#ik-types).
 
 ## Citation
