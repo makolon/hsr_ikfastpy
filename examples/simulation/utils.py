@@ -84,13 +84,6 @@ KIVA_SHELF_SDF = 'kiva_shelf/model.sdf'
 FLOOR_URDF = 'plane.urdf'
 TABLE_URDF = 'table/table.urdf'
 
-# Gearbox
-BLUE_GEAR_URDF = 'models/gearbox/gear1.obj'
-GREEN_GEAR_URDF = 'models/gearbox/gear2.obj'
-RED_GEAR_URDF = 'models/gearbox/gear3.obj'
-YELLOW_SHAFT_URDF = 'models/gearbox/shaft1.obj'
-RED_SHAFT_URDF = 'models/gearbox/shaft2.obj'
-
 # Objects
 SMALL_BLOCK_URDF = 'models/drake/objects/block_for_pick_and_place.urdf'
 BLOCK_URDF = 'models/drake/objects/block_for_pick_and_place_mid_size.urdf'
