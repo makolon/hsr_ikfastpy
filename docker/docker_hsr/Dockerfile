@@ -72,19 +72,19 @@ RUN apt-get update && \
 RUN pip3 install -U pip
 RUN pip3 install \
     setuptools \
-	gym \
-	numpy \
-	pybullet \
-	matplotlib \
-	opencv-python \
-	scipy \
-	scikit-image \
-	tensorflow \
-	tensorflow-addons \
-	tensorflow_hub\
-	transforms3d \
-	keras \
-	jupyterlab \
+　　　　　　　　gym \
+　　　　　　　　numpy \
+    pybullet \
+    matplotlib \
+    opencv-python \
+    scipy \
+    scikit-image \
+    tensorflow \
+    tensorflow-addons \
+    tensorflow_hub\
+    transforms3d \
+    keras \
+    jupyterlab \
     torch \
     torchvision \
     kinpy \
