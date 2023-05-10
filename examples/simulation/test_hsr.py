@@ -2,20 +2,20 @@
 
 import os
 import sys
+import numpy as np
 import pybullet as p
 
 from hsrb_utils import TOP_HOLDING_ARM, SIDE_HOLDING_ARM, HSRB_URDF, \
-    HSR_GROUPS, open_arm, get_disabled_collisions
-from utils import set_base_values, joint_from_name, quat_from_euler, set_joint_position, \
+    HSR_GROUPS, get_disabled_collisions
+from utils import set_base_values, quat_from_euler, \
     set_joint_positions, add_data_path, connect, plan_base_motion, plan_joint_motion, enable_gravity, \
-    joint_controller, dump_body, load_model, joints_from_names, wait_if_gui, disconnect, get_joint_positions, \
-    get_link_pose, link_from_name, get_pose, wait_if_gui, load_pybullet, set_quat, Euler, PI, RED, add_line, \
+    joint_controller, dump_body, load_model, joints_from_names, wait_if_gui, disconnect, \
+    get_link_pose, link_from_name, wait_if_gui, load_pybullet, set_quat, Euler, PI, RED, add_line, \
     wait_for_duration, LockRenderer, HideOutput
 
 SLEEP = None
 
 def test_base_motion(hsr, base_start, base_goal, obstacles=[]):
-    #disabled_collisions = get_disabled_collisions(hsr)
     set_base_values(hsr, base_start)
     wait_if_gui('Plan Base?')
     base_limits = ((-2.5, -2.5), (2.5, 2.5))
@@ -59,7 +59,7 @@ def test_arm_control(hsr, arm_joints, arm_start):
 #####################################
 
 def test_ikfast(hsr):
-    from pybullet_tools.ikfast.hsrb4s.ik import get_tool_pose, get_ikfast_generator
+    from hsrb_ikfast.ik import get_tool_pose, get_ikfast_generator
     arm_joints = joints_from_names(hsr, HSR_GROUPS['arm'])
     base_joints = joints_from_names(hsr, HSR_GROUPS['base'])
     base_arm = base_joints + arm_joints
@@ -69,7 +69,6 @@ def test_ikfast(hsr):
 
     print('get_link_pose: ', get_link_pose(hsr, link_from_name(hsr, 'hand_palm_link')))
     print('get_tool_pose: ', pose)
-    import numpy as np
     for i in range(1000):
         pose_x = 2.5 + np.random.random() * 0.1
         pose_y = 2.0 + np.random.random() * 0.1
