@@ -20,6 +20,9 @@ RUN apt-get update || true && apt-get install -y --no-install-recommends \
 
 RUN pip install git+https://github.com/sympy/sympy.git@sympy-0.7.1
 
+RUN apt-get update || true && apt-get install -y --no-install-recommends \
+    python-scipy
+
 RUN echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
-RUN echo "source /ikfast/entrypoint.sh" >> ~/.bashrc
+RUN echo "source /ikfast/docker/docker_openrave/entrypoint.sh" >> ~/.bashrc
 RUN echo "export DISPLAY=:1" >> ~/.bashrc
