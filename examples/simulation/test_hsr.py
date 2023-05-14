@@ -15,7 +15,6 @@ from utils import set_base_values, joint_from_name, quat_from_euler, set_joint_p
 SLEEP = None
 
 def test_base_motion(hsr, base_start, base_goal, obstacles=[]):
-    #disabled_collisions = get_disabled_collisions(hsr)
     set_base_values(hsr, base_start)
     wait_if_gui('Plan Base?')
     base_limits = ((-2.5, -2.5), (2.5, 2.5))
@@ -59,7 +58,7 @@ def test_arm_control(hsr, arm_joints, arm_start):
 #####################################
 
 def test_ikfast(hsr):
-    from pybullet_tools.ikfast.hsrb4s.ik import get_tool_pose, get_ikfast_generator
+    from .hsr_ikfast.ik_solver import get_tool_pose, get_ikfast_generator
     arm_joints = joints_from_names(hsr, HSR_GROUPS['arm'])
     base_joints = joints_from_names(hsr, HSR_GROUPS['base'])
     base_arm = base_joints + arm_joints
