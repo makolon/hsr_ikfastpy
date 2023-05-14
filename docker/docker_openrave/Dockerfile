@@ -26,3 +26,4 @@ RUN apt-get update || true && apt-get install -y --no-install-recommends \
 RUN echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
 RUN echo "source /ikfast/docker/docker_openrave/entrypoint.sh" >> ~/.bashrc
 RUN echo "export DISPLAY=:1" >> ~/.bashrc
+
