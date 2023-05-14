@@ -3,13 +3,15 @@ import numpy as np
 import pybullet as p
 from collections import namedtuple
 from scipy.spatial.transform import Rotation as R
-from hsrb_utils import get_joint_limits, get_joint_position, get_joint_positions, get_distance
+
+from .hsrb_utils import get_joint_limits, get_joint_position, get_joint_positions, get_distance
 
 IKFastInfo = namedtuple('IKFastInfo', ['module_name', 'base_link', 'ee_link', 'free_joints'])
 
 USE_ALL = False
 USE_CURRENT = None
 
+#####################################
 
 def invert(pose):
     point, quat = pose
@@ -20,6 +22,8 @@ def multiply(*poses):
     for next_pose in poses[1:]:
         pose = p.multiplyTransforms(pose[0], pose[1], *next_pose) # TODO: modify
     return pose
+
+#####################################
 
 def all_between(lower_limits, values, upper_limits):
     assert len(lower_limits) == len(values)

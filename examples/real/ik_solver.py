@@ -2,20 +2,23 @@ import os
 import sys
 import glob
 import random
+import numpy as np
 
-from utils import multiply, invert, all_between, compute_forward_kinematics, \
+from .utils import multiply, invert, all_between, compute_forward_kinematics, \
     compute_inverse_kinematics, select_solution, USE_ALL 
-from hsrb_utils import get_link_pose, get_joint_positions, get_custom_limits 
+from .hsrb_utils import get_link_pose, get_joint_positions, get_custom_limits
 
 
-BASE_FRAME = 'base_link'
+BASE_FRAME = 'base_footprint'
 TORSO_JOINT = 'torso_lift_joint'
+ROTATION_JOINT = 'joint_rz'
+LIFT_JOINT = 'arm_lift_joint'
 HSR_TOOL_FRAMES = {'arm': 'hand_palm_link'}
 IK_FRAME = {'arm': 'hand_palm_link'}
 
 def get_ik_lib():
     lib_path = os.environ['PYTHONPATH'].split(':')[1] # TODO: modify
-    ik_lib_path = glob.glob(os.path.join(lib_path, '**/hsrb4s'), recursive=True)
+    ik_lib_path = glob.glob(os.path.join(lib_path, '**/hsr_ikfast'), recursive=True)
     return ik_lib_path[0]
 
 #####################################
@@ -48,7 +51,7 @@ def get_ik_generator(arm, ik_pose, custom_limits={}):
     base_joints = ['odom_x', 'odom_y', 'odom_t']
     min_limits, max_limits = get_custom_limits(base_joints, arm_joints, custom_limits)
 
-    sampled_limits = [(0.0, 0.345)]
+    sampled_limits = [(0.0, 0.0), (0.0, 0.34)]
     while True:
         sampled_values = [random.uniform(*limits) for limits in sampled_limits]
         confs = compute_inverse_kinematics(arm_ik[arm], base_from_ik, sampled_values)
@@ -96,9 +99,9 @@ if __name__ == '__main__':
 
     # test inverse kinematics
     import numpy as np
-    pos_x = 0.0 + np.random.random() * 0.1
-    pos_y = 0.0 + np.random.random() * 0.1
-    pos_z = 0.6 + np.random.random() * 0.1
+    pos_x = 0.0
+    pos_y = 0.0
+    pos_z = 0.6
     rot_x = np.random.random()
     rot_y = np.random.random()
     rot_z = np.random.random()
@@ -117,9 +120,9 @@ if __name__ == '__main__':
     import time
     for i in range(100):
         start = time.time()
-        pose_x = 2.5 + np.random.random() * 0.1
-        pose_y = 2.0 + np.random.random() * 0.1
-        pose_z = 0.6 + np.random.random() * 0.1
+        pose_x = 2.5
+        pose_y = 2.0
+        pose_z = 0.6
         tool_pose = ((pose_x, pose_y, pose_z), (0.707107, 0.0, 0.707107, 0.0))
         generator = get_ik_generator('arm', tool_pose)
         solutions = next(generator)

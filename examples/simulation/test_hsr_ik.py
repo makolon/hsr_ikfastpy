@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
 import os
-import sys
 import numpy as np
 import pybullet as p
 
-from hsrb_utils import TOP_HOLDING_ARM, SIDE_HOLDING_ARM, HSRB_URDF, \
+from .hsrb_utils import TOP_HOLDING_ARM, SIDE_HOLDING_ARM, HSRB_URDF, \
     HSR_GROUPS, get_disabled_collisions
-from utils import set_base_values, quat_from_euler, \
+from .sim_utils import set_base_values, quat_from_euler, \
     set_joint_positions, add_data_path, connect, plan_base_motion, plan_joint_motion, enable_gravity, \
     joint_controller, dump_body, load_model, joints_from_names, wait_if_gui, disconnect, \
     get_link_pose, link_from_name, wait_if_gui, load_pybullet, set_quat, Euler, PI, RED, add_line, \

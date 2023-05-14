@@ -63,3 +63,4 @@ def get_joint_positions(jonits):
                 joint_positions.append(pose)
         else:
             joint_positions.append(whole_body.joint_positions[joint])
+    return joint_positions
