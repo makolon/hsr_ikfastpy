@@ -13,20 +13,24 @@ The Toyota Human Support Robot (HSR) is a versatile robot designed to assist hum
 ```
 git clone https://github.com/makolon/hsr_ikfast.git
 ```
-2. Build docker
+
+2. Build docker (Optional)
 ```
 cd docker/docker_openrave
 ./build.sh
 ```
-3. Run docker
+
+3. Run docker (Optional)
 ```
 ./run.sh
 ```
-4. Execute OpenRave
+
+4. Execute OpenRave's IKFast C++ executables code generation (Optional)
 ```
-cd ../
+cd /ikfast/
 ./exec_openrave.sh
 ```
+
 5. Compile the Cython wrapper
 ```
 cd ./hsrb_ikfast
@@ -39,19 +43,20 @@ In oder to run the following demo, you need to build another docker container.
 cd docker/docker_hsr
 ./build.sh
 ```
+
 Then, run docker container.
 ```
 cd ../
 ./run.sh
 ```
+
 Run demo in pybullet simulation environment
 ```
 cd ./examples/simulation
 python test_hsr.py 
 ```
 
-### Real Demo
-RUn demo in Real HSR
+Run demo in Real HSR
 ```
 cd ./examples/real
 python ik_controller.py
@@ -67,6 +72,7 @@ openrave wrapper.xml
 ```
 openrave-robot.py hsrb4s.dae --info links
 ```
+
 3. Use OpenRave to re-generate the IKFast C++ code `ikfast61.cpp`
 ```
 ./exec_openrave.sh
