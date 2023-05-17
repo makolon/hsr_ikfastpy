@@ -1,6 +1,6 @@
 import rospy
 import numpy as np
-from ik_solver import get_tool_pose, get_ik_generator, hsr_inverse_kinematics
+from .ik_solver import get_tool_pose, hsr_inverse_kinematics
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
 
@@ -44,13 +44,12 @@ class IKController():
 
     def control(self, pose):
         # Inverse kinematics
-        generator = get_ik_generator('arm', pose)
-        ik_pose = next(generator)
+        ik_pose = hsr_inverse_kinematics('arm', pose) # pose must be contain (pos, quat)
 
-        if len(ik_pose) == 0:
+        if ik_pose is None:
             return
         else:
-            base_pose, arm_pose = ik_pose[0][:3], ik_pose[0][3:]
+            base_pose, arm_pose = ik_pose[:3], ik_pose[3:]
 
         # Set target pose
         base_traj, arm_traj = self.set_pose(base_pose, arm_pose)
@@ -58,3 +57,24 @@ class IKController():
         # Publish target pose
         self.base_pub.publish(base_traj)
         self.arm_pub.publish(arm_traj)
+
+
+if __name__ == '__main__':
+    ik_controller = IKController()
+    rate = rospy.Rate(50)
+
+    pose_x, pose_y, pose_z = 0.0, 0.0, 0.5
+    foward = (0.70710678, 0.0, 0.70710678, 0.0)
+    back = (0.0, -0.70710678, 0.0, 0.70710678)
+    right = (0.5, -0.5, 0.5, 0.5)
+    left = (0.5, 0.5, 0.5, -0.5)
+    while not rospy.is_shutdown():
+        # Test forward kinematics
+        fk_pose = get_tool_pose('arm')
+
+        # Test inverse kinematics
+        tool_pose = ((pose_x, pose_y, pose_z), foward)
+        ik_controller.control(tool_pose)
+
+        # Sleep
+        rate.sleep()

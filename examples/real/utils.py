@@ -3,7 +3,8 @@ import numpy as np
 import pybullet as p
 from collections import namedtuple
 from scipy.spatial.transform import Rotation as R
-from hsrb_utils import get_joint_limits, get_joint_position, get_joint_positions, get_distance
+
+from .hsrb_utils import get_joint_limits, get_joint_position, get_joint_positions, get_distance
 
 IKFastInfo = namedtuple('IKFastInfo', ['module_name', 'base_link', 'ee_link', 'free_joints'])
 

@@ -1,6 +1,7 @@
 import rospy
 import numpy as np
 import hsrb_interface
+from scipy.spatial.transform import Rotation as R
 
 robot = hsrb_interface.Robot()
 base = robot.get('omni_base')
@@ -12,10 +13,10 @@ def get_link_pose(link):
     link_pose = ((tf_pose.transform.translation.x,
                   tf_pose.transform.translation.y,
                   tf_pose.transform.translation.z),
-                 (-tf_pose.transform.rotation.x,
-                  -tf_pose.transform.rotation.y,
-                  -tf_pose.transform.rotation.z,
-                  -tf_pose.transform.rotation.w))
+                 (tf_pose.transform.rotation.x,
+                  tf_pose.transform.rotation.y,
+                  tf_pose.transform.rotation.z,
+                  tf_pose.transform.rotation.w))
     return link_pose
 
 def get_joint_limits(joint):
@@ -59,7 +60,15 @@ def get_joint_positions(jonits):
     joint_positions = []
     for joint in jonits:
         if joint == 'world_joint':
-            for pose in base.pose:
-                joint_positions.append(pose)
+            base_pose = base._tf2_buffer.lookup_transform('map', 'base_footprint', rospy.Time(0))
+            joint_positions.append(base_pose.transform.translation.x)
+            joint_positions.append(base_pose.transform.translation.y)
+            base_quat = np.array([base_pose.transform.rotation.x,
+                   base_pose.transform.rotation.y,
+                   base_pose.transform.rotation.z,
+                   base_pose.transform.rotation.w])
+            base_rz = R.from_quat(base_quat).as_euler('xyz')[2]
+            joint_positions.append(base_rz)
         else:
             joint_positions.append(whole_body.joint_positions[joint])
+    return joint_positions
