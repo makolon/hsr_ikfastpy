@@ -6,7 +6,7 @@ import numpy as np
 from itertools import combinations
 from collections import namedtuple
 
-from .utils import multiply, get_link_pose, set_joint_position, set_joint_positions, get_joint_positions, get_min_limit, get_max_limit, quat_from_euler, read_pickle, set_pose, \
+from .sim_utils import multiply, get_link_pose, set_joint_position, set_joint_positions, get_joint_positions, get_min_limit, get_max_limit, quat_from_euler, read_pickle, set_pose, \
     get_pose, euler_from_quat, link_from_name, point_from_pose, invert, Pose, \
     unit_pose, joints_from_names, PoseSaver, get_aabb, get_joint_limits, ConfSaver, get_bodies, create_mesh, remove_body, \
     unit_from_theta, violates_limit, violates_limits, add_line, get_body_name, get_num_joints, approximate_as_cylinder, \

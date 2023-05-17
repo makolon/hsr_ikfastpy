@@ -72,8 +72,8 @@ RUN apt-get update && \
 RUN pip3 install -U pip
 RUN pip3 install \
     setuptools \
-　　　　　　　　gym \
-　　　　　　　　numpy \
+    gym \
+    numpy \
     pybullet \
     matplotlib \
     opencv-python \
@@ -136,9 +136,6 @@ RUN sh -c '/bin/echo -e "machine packages.hsr.io\nlogin hsr-user\npassword jD3k4
 RUN apt-get update && apt-get install -y ros-noetic-tmc-desktop-full
 COPY ./hsrrc /root/
 RUN cat /root/hsrrc >> ~/.bashrc
-
-### Terminator window settings
-COPY config /
 
 ### User group settings
 COPY entrypoint.sh /

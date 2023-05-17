@@ -19,7 +19,7 @@ IK_FRAME = {'arm': 'hand_palm_link'}
 
 def get_ik_lib():
     lib_path = os.environ['PYTHONPATH'].split(':')[1] # TODO: modify
-    ik_lib_path = glob.glob(os.path.join(lib_path, '**/hsrb'), recursive=True)
+    ik_lib_path = glob.glob(os.path.join(lib_path, '**/hsr_ikfast'), recursive=True)
     return ik_lib_path[0]
 
 #####################################
@@ -86,40 +86,3 @@ def hsr_inverse_kinematics(arm, gripper_pose, custom_limits={}, **kwargs):
         return None
 
     return base_arm_conf
-
-if __name__ == '__main__':
-    # test forward kinematics
-    fk_pose = get_tool_pose('arm')
-    print('fk_pose:', fk_pose)
-
-    # test inverse kinematics
-    import numpy as np
-    pos_x = 0.0 + np.random.random() * 0.1
-    pos_y = 0.0 + np.random.random() * 0.1
-    pos_z = 0.6 + np.random.random() * 0.1
-    rot_x = np.random.random()
-    rot_y = np.random.random()
-    rot_z = np.random.random()
-    rot_w = np.random.random()
-    rot_sum = (rot_x + rot_y + rot_z + rot_w)
-    rot_x /= rot_sum
-    rot_y /= rot_sum
-    rot_z /= rot_sum
-    rot_w /= rot_sum
-    pose = ((pos_x, pos_y, pos_z), (0.707107, 0.0, 0.707107, 0.0))
-    print('pose:', pose)
-    ik_pose = hsr_inverse_kinematics('arm', pose)
-    print('ik_pose:', ik_pose)
-
-    # test inverse kinematics generator
-    import time
-    for i in range(100):
-        start = time.time()
-        pose_x = 2.5 + np.random.random() * 0.1
-        pose_y = 2.0 + np.random.random() * 0.1
-        pose_z = 0.6 + np.random.random() * 0.1
-        tool_pose = ((pose_x, pose_y, pose_z), (0.707107, 0.0, 0.707107, 0.0))
-        generator = get_ik_generator('arm', tool_pose)
-        solutions = next(generator)
-        print(solutions)
-        print('Loop Hz:', 1/(time.time()-start))
