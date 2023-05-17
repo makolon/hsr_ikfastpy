@@ -6,7 +6,8 @@ import numpy as np
 from itertools import combinations
 from collections import namedtuple
 
-from .sim_utils import multiply, get_link_pose, set_joint_position, set_joint_positions, get_joint_positions, get_min_limit, get_max_limit, quat_from_euler, read_pickle, set_pose, \
+from hsrb_never_collisions import NEVER_COLLISIONS
+from sim_utils import multiply, get_link_pose, set_joint_position, set_joint_positions, get_joint_positions, get_min_limit, get_max_limit, quat_from_euler, read_pickle, set_pose, \
     get_pose, euler_from_quat, link_from_name, point_from_pose, invert, Pose, \
     unit_pose, joints_from_names, PoseSaver, get_aabb, get_joint_limits, ConfSaver, get_bodies, create_mesh, remove_body, \
     unit_from_theta, violates_limit, violates_limits, add_line, get_body_name, get_num_joints, approximate_as_cylinder, \
@@ -80,6 +81,12 @@ def get_other_arm(arm):
     raise ValueError(arm)
 
 #####################################
+
+def get_disabled_collisions(hsr):
+    disabled_names = NEVER_COLLISIONS
+    link_mapping = {get_link_name(hsr, link): link for link in get_links(hsr)}
+    return {(link_mapping[name1], link_mapping[name2])
+            for name1, name2 in disabled_names if (name1 in link_mapping) and (name2 in link_mapping)}
 
 def load_dae_collisions():
     dae_file = 'models/hsr_description/hsr-beta-static.dae'

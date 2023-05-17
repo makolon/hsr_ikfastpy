@@ -27,7 +27,7 @@ from multiprocessing import TimeoutError
 from contextlib import contextmanager
 from scipy.spatial.transform import Rotation as R
 
-from .transformations import quaternion_from_matrix, unit_vector, euler_from_quaternion, quaternion_slerp
+from transformations import quaternion_from_matrix, unit_vector, euler_from_quaternion, quaternion_slerp
 
 
 try:

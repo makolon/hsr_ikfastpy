@@ -1,12 +1,15 @@
+import os
+import sys
+import glob
 import random
 import numpy as np
 import pybullet as p
 
-from .ik_utils import get_ik_limits, compute_forward_kinematics, compute_inverse_kinematics, select_solution, \
+from ik_utils import get_ik_limits, compute_forward_kinematics, compute_inverse_kinematics, select_solution, \
     USE_ALL, USE_CURRENT
-from .hsrb_utils import HSR_TOOL_FRAMES, get_torso_arm_joints, get_base_joints, \
+from hsrb_utils import HSR_TOOL_FRAMES, get_torso_arm_joints, get_base_joints, \
     get_gripper_link, get_arm_joints, get_base_arm_joints
-from .sim_utils import multiply, get_link_pose, link_from_name, get_joint_positions, \
+from sim_utils import multiply, get_link_pose, link_from_name, get_joint_positions, \
     joint_from_name, invert, all_between, sub_inverse_kinematics, set_joint_positions, \
     inverse_kinematics, get_joint_positions, pairwise_collision, \
     get_custom_limits, get_custom_limits_with_base
@@ -18,10 +21,17 @@ ROTATION_JOINT = 'joint_rz'
 LIFT_JOINT = 'arm_lift_joint'
 IK_FRAME = {'arm': 'hand_palm_link'}
 
+def get_ik_lib():
+    lib_path = os.environ['PYTHONPATH'].split(':')[1] # TODO: modify
+    ik_lib_path = glob.glob(os.path.join(lib_path, '**/hsrb'), recursive=True)
+    return ik_lib_path[0]
+
 #####################################
 
 def get_tool_pose(robot, arm):
-    from .ikArm import armFK
+    sys.path.append(get_ik_lib())
+    from ikArm import armFK
+
     arm_fk = {'arm': armFK}
     ik_joints = get_base_arm_joints(robot, arm)
     conf = get_joint_positions(robot, ik_joints)
@@ -41,7 +51,8 @@ def is_ik_compiled():
         return False
 
 def get_ikfast_generator(robot, arm, ik_pose, rotation_limits=USE_ALL, lift_limits=USE_ALL, custom_limits={}):
-    from .ikArm import armIK
+    sys.path.append(get_ik_lib())
+    from ikArm import armIK
 
     arm_ik = {'arm': armIK}
     world_from_base = get_link_pose(robot, link_from_name(robot, BASE_FRAME))

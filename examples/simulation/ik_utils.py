@@ -2,7 +2,7 @@ import random
 import numpy as np
 from collections import namedtuple
 
-from .sim_utils import matrix_from_quat, point_from_pose, quat_from_pose, quat_from_matrix, \
+from sim_utils import matrix_from_quat, point_from_pose, quat_from_pose, quat_from_matrix, \
     get_joint_limits, get_joint_position, get_joint_positions, get_distance
 
 
