@@ -58,27 +58,37 @@ def test_arm_control(hsr, arm_joints, arm_start):
 #####################################
 
 def test_ikfast(hsr):
-    from ik_solver import get_tool_pose, get_ikfast_generator
+    from ik_solver import get_tool_pose, hsr_inverse_kinematics
     arm_joints = joints_from_names(hsr, HSR_GROUPS['arm'])
     base_joints = joints_from_names(hsr, HSR_GROUPS['base'])
-    base_arm = base_joints + arm_joints
+    base_arm_joints = base_joints + arm_joints
 
     arm = 'arm'
     pose = get_tool_pose(hsr, arm)
 
     print('get_link_pose: ', get_link_pose(hsr, link_from_name(hsr, 'hand_palm_link')))
     print('get_tool_pose: ', pose)
-    for i in range(1000):
-        pose_x = 2.5 + np.random.random() * 0.1
-        pose_y = 2.0 + np.random.random() * 0.1
-        pose_z = 0.6 + np.random.random() * 0.1
-        tool_pose = ((pose_x, pose_y, pose_z), (0.707107, 0.0, 0.707107, 0.0))
-        generator = get_ikfast_generator(hsr, arm, tool_pose, torso_limits=False)
-        solutions = next(generator)
-        print(i, len(solutions))
-        for q in solutions:
-            set_joint_positions(hsr, base_arm, q)
-            wait_if_gui()
+    for i in range(100):
+        pose_x = 2.5
+        pose_y = 2.0
+        pose_z = 0.5
+
+        rotation = np.random.choice(['foward', 'back', 'right', 'left'])
+        if rotation == 'foward':
+            angle = ([0.707107, 0.0, 0.707107, 0.0])
+        elif rotation == 'back':
+            angle = ([0.0, -0.70710678, 0.0, 0.70710678])
+        elif rotation == 'right':
+            angle = ([0.5, -0.5, 0.5, 0.5])
+        elif rotation == 'left':
+            angle = ([0.5, 0.5, 0.5, -0.5])
+        tool_pose = ((pose_x, pose_y, pose_z), angle)
+        ik_poses = hsr_inverse_kinematics(hsr, arm, tool_pose)
+        set_joint_positions(hsr, base_arm_joints, ik_poses)
+
+        ee_pose = get_tool_pose(hsr, arm)
+        print("ee_pose:", ee_pose)
+        wait_if_gui()
 
 #####################################
 
