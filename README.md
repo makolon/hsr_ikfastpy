@@ -14,13 +14,13 @@ The Toyota Human Support Robot (HSR) is a versatile robot designed to assist hum
 git clone https://github.com/makolon/hsr_ikfast.git
 ```
 
-2. Build docker (Optional)
+2. Build docker
 ```
 cd docker/docker_openrave
 ./build.sh
 ```
 
-3. Run docker (Optional)
+3. Run docker
 ```
 ./run.sh
 ```
