@@ -1,6 +1,6 @@
 # HSRIKFastPy
 ## Overview
-The Toyota Human Support Robot (HSR) is a versatile robot designed to assist humans in various tasks. It is equipped with advanced kinematic capabilities, allowing it to perform complex manipulation tasks with precision. HSRIKFastPy leverages OpenRave's IKFast C++ executables to provide a Python interface for efficient inverse kinematics calculations on the HSR.
+The Toyota Human Support Robot (HSR) is a versatile robot designed to assist humans in various tasks. It is equipped with advanced kinematic capabilities, allowing it to perform complex manipulation tasks. HSRIKFastPy leverages OpenRave's IKFast C++ executables to provide a Python interface for efficient inverse kinematics calculations on the HSR.
 
 ## Features
 - Python wrapper for OpenRave's IKFast C++ executables
