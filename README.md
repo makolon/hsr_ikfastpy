@@ -80,6 +80,5 @@ openrave-robot.py hsrb4s.dae --info links
 You can choose `--iktype` in `exec_openrave.sh` from the list of ik types described in this [document](http://openrave.org/docs/latest_stable/openravepy/ikfast/#ik-types).
 
 ## License
-HSRIKFastPy is released under the MIT Licence.
 
 ## Acknowledgements
