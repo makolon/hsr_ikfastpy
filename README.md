@@ -38,7 +38,7 @@ python setup.py
 ```
 
 ### Simulation & Real Demo
-In oder to run the following demo, you need to build another docker container.
+In order to run the following demo, you need to build another docker container.
 ```
 cd docker/docker_hsr
 ./build.sh
@@ -56,7 +56,7 @@ cd ./examples/simulation
 python test_hsr.py 
 ```
 
-Run demo in Real HSR
+Run demo with real HSR
 ```
 cd ./examples/real
 python ik_controller.py
