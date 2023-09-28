@@ -23,7 +23,7 @@ IK_FRAME = {'arm': 'hand_palm_link'}
 
 def get_ik_lib():
     lib_path = os.environ['PYTHONPATH'].split(':')[1] # TODO: modify
-    ik_lib_path = glob.glob(os.path.join(lib_path, '**/hsrb'), recursive=True)
+    ik_lib_path = glob.glob(lib_path, recursive=True)
     return ik_lib_path[0]
 
 #####################################
@@ -44,7 +44,8 @@ def get_tool_pose(robot, arm):
 
 def is_ik_compiled():
     try:
-        from .ikArm import armIK
+        sys.path.append(get_ik_lib())
+        from ikArm import armIK
         return True
 
     except ImportError:
@@ -63,6 +64,8 @@ def get_ikfast_generator(robot, arm, ik_pose, rotation_limits=USE_ALL, lift_limi
     base_joints = get_base_joints(robot, arm)
     min_limits, max_limits = get_custom_limits_with_base(robot, arm_joints, base_joints, custom_limits)
 
+    arm_rot = np.pi # TODO: modify
+    sampled_limits = [(arm_rot-np.pi, arm_rot-np.pi), (0.0, 0.34)]
     while True:
         sampled_values = [random.uniform(*limits) for limits in sampled_limits]
         confs = compute_inverse_kinematics(arm_ik[arm], base_from_ik, sampled_values)
@@ -118,15 +121,16 @@ def sample_tool_ik(robot, arm, tool_pose, nearby_conf=USE_ALL, max_attempts=100,
 def hsr_inverse_kinematics(robot, arm, gripper_pose, obstacles=[], custom_limits={}, solver='ikfast', **kwargs):
     arm_link = get_gripper_link(robot, arm)
     arm_joints = get_arm_joints(robot, arm)
+    base_arm_joints = get_base_arm_joints(robot, arm)
 
     if is_ik_compiled():
         ik_joints = get_base_arm_joints(robot, arm)
         base_arm_conf = sample_tool_ik(robot,
-                                        arm,
-                                        gripper_pose,
-                                        custom_limits=custom_limits,
-                                        solver=solver,
-                                        **kwargs)
+                                       arm,
+                                       gripper_pose,
+                                       custom_limits=custom_limits,
+                                       solver=solver,
+                                       **kwargs)
         if base_arm_conf is None:
             return None
         set_joint_positions(robot, ik_joints, base_arm_conf)
@@ -139,4 +143,4 @@ def hsr_inverse_kinematics(robot, arm, gripper_pose, obstacles=[], custom_limits
     if any(pairwise_collision(robot, b) for b in obstacles):
         return None
 
-    return get_joint_positions(robot, arm_joints)
+    return get_joint_positions(robot, base_arm_joints)

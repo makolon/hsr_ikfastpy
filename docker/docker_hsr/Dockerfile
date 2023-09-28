@@ -115,7 +115,7 @@ ENV ROS_PACKAGE_PATH=/root/catkin_ws:$ROS_PACKAGE_PATH
 ENV ROS_WORKSPACE=/root/catkin_ws
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 RUN echo "export DISPLAY=:0" >> ~/.bashrc
-RUN echo "export PYTHONPATH='/root/tamp-hsr/hsr_tamp:$PYTHONPATH'" >> ~/.bashrc
+RUN echo "export PYTHONPATH='/root/hsr_ikfastpy/hsr_ikfast:$PYTHONPATH'" >> ~/.bashrc
 
 ### Install CUDA
 RUN rm /etc/apt/sources.list.d/cuda.list

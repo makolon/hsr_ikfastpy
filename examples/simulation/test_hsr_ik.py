@@ -84,7 +84,8 @@ def test_ikfast(hsr):
             angle = ([0.5, 0.5, 0.5, -0.5])
         tool_pose = ((pose_x, pose_y, pose_z), angle)
         ik_poses = hsr_inverse_kinematics(hsr, arm, tool_pose)
-        set_joint_positions(hsr, base_arm_joints, ik_poses)
+        if ik_poses != None:
+            set_joint_positions(hsr, base_arm_joints, ik_poses)
 
         ee_pose = get_tool_pose(hsr, arm)
         print("ee_pose:", ee_pose)
