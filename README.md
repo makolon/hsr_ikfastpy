@@ -14,13 +14,13 @@ The Toyota Human Support Robot (HSR) is a versatile robot designed to assist hum
 
 1. Clone this repository
 ```
-git clone https://github.com/makolon/hsr_ikfast.git
+git clone --recursive https://github.com/makolon/hsr_ikfast.git
 ```
 
 ### Simulation & Real Demo
 In order to run the following demo, you need to build another docker container.
 ```
-cd docker/docker_hsr
+cd hsr_ikfastpy/docker/docker_hsr
 ./build.sh
 ```
 
@@ -32,8 +32,8 @@ cd ../
 
 Compile the Cython wrapper.
 ```
-cd ./hsrb_ikfast
-python setup.py
+cd ./hsr_ikfastpy/hsr_ikfast
+python3 setup.py
 ```
 
 Run demo in pybullet simulation environment.
