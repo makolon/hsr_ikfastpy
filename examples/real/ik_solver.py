@@ -19,7 +19,7 @@ IK_FRAME = {'arm': 'hand_palm_link'}
 
 def get_ik_lib():
     lib_path = os.environ['PYTHONPATH'].split(':')[1] # TODO: modify
-    ik_lib_path = glob.glob(os.path.join(lib_path, '**/hsr_ikfast'), recursive=True)
+    ik_lib_path = glob.glob(lib_path, recursive=True)
     return ik_lib_path[0]
 
 #####################################
