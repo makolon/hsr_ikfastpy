@@ -1,8 +1,8 @@
 # please set network-interface
-# Wireless (Please change network_if)
-network_if=
-# Wired (Please change network_if)
-network_if=
+# TODO: Please change network_if, I'm using enx4s0 as a placeholder.
+network_if=enx4s0 # Wireless
+# TODO: Please change network_if, I'm using enx4s0 as a placeholder.
+network_if=enx4s0 # Wired
 
 if [ -e /opt/ros/noetic/setup.bash ] ; then
     source /opt/ros/noetic/setup.bash
@@ -19,7 +19,6 @@ fi
 
 export ROS_HOME=~/.ros
 export ROBOT_NAME=hsrc
-(Please change HSR ip address)
-ip_addresss=
+# TODO: Please change HSR ip address, I'm using 192.168.11.5 as a placeholder.
 alias sim_mode='export ROS_MASTER_URI=http://localhost:11311 export PS1="\[\033[44;1;37m\]<local>\[\033[0m\]\w$ "'
-alias hsrb_mode='export ROS_MASTER_URI=http://$ip_address:11311 export PS1="\[\033[41;1;37m\]<hsrb>\[\033[0m\]\w$ "'
+alias hsrb_mode='export ROS_MASTER_URI=http://192.168.11.5:11311 export PS1="\[\033[41;1;37m\]<hsrb>\[\033[0m\]\w$ "'
