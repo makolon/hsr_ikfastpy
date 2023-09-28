@@ -12,7 +12,7 @@
 /// See the License for the specific language governing permissions and
 /// limitations under the License.
 ///
-/// ikfast version 0x10000049 generated on 2023-04-30 07:25:26.629988
+/// ikfast version 0x10000049 generated on 2023-09-28 12:27:07.044814
 /// To compile with gcc:
 ///     gcc -lstdc++ ik.cpp
 /// To compile without any main function as a shared object (might need -llapack):
@@ -361,7 +361,7 @@ eerot[8]=((((-1.0)*x12*x8*x9))+x22);
 eetrans[2]=((0.34)+(((0.345)*x1))+(((0.1405)*x22))+(((0.005)*x9))+(((-1.0)*x10*x2*x8))+(((-1.0)*x11*x4*x5))+j[3]+((x7*(((((0.012)*x27))+((x11*x2*x6)))))));
 }
 
-IKFAST_API int GetNumFreeParameters() { return 1; }
+IKFAST_API int GetNumFreeParameters() { return 2; }
 IKFAST_API int* GetFreeParameters() { static int freeparams[] = {2, 3}; return freeparams; }
 IKFAST_API int GetNumJoints() { return 8; }
 
@@ -20762,7 +20762,6 @@ int main(int argc, char** argv)
 }
 
 #endif
-
 
 //// START
 static PyObject *arm_ik(PyObject *self, PyObject *args) {
