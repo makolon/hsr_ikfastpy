@@ -1,6 +1,6 @@
 # HSRIKFastPy
 ## Overview
-The Toyota Human Support Robot (HSR) is a versatile robot designed to assist humans in various tasks. It is equipped with advanced kinematic capabilities, allowing it to perform complex manipulation tasks with precision. HSRIKFastPy leverages OpenRave's IKFast C++ executables to provide a Python interface for efficient inverse kinematics calculations on the HSR.
+The Toyota Human Support Robot (HSR) is a versatile robot designed to assist humans in various tasks. It is equipped with advanced kinematic capabilities, allowing it to perform complex manipulation tasks. HSRIKFastPy leverages OpenRave's IKFast C++ executables to provide a Python interface for efficient inverse kinematics calculations on the HSR.
 
 ## Features
 - Python wrapper for OpenRave's IKFast C++ executables
@@ -14,13 +14,13 @@ The Toyota Human Support Robot (HSR) is a versatile robot designed to assist hum
 git clone https://github.com/makolon/hsr_ikfast.git
 ```
 
-2. Build docker (Optional)
+2. Build docker
 ```
 cd docker/docker_openrave
 ./build.sh
 ```
 
-3. Run docker (Optional)
+3. Run docker
 ```
 ./run.sh
 ```
@@ -38,7 +38,7 @@ python setup.py
 ```
 
 ### Simulation & Real Demo
-In oder to run the following demo, you need to build another docker container.
+In order to run the following demo, you need to build another docker container.
 ```
 cd docker/docker_hsr
 ./build.sh
@@ -56,7 +56,7 @@ cd ./examples/simulation
 python test_hsr.py 
 ```
 
-Run demo in Real HSR
+Run demo with real HSR
 ```
 cd ./examples/real
 python ik_controller.py
@@ -80,6 +80,5 @@ openrave-robot.py hsrb4s.dae --info links
 You can choose `--iktype` in `exec_openrave.sh` from the list of ik types described in this [document](http://openrave.org/docs/latest_stable/openravepy/ikfast/#ik-types).
 
 ## License
-HSRIKFastPy is released under the MIT Licence.
 
 ## Acknowledgements
