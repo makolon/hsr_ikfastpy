@@ -98,7 +98,7 @@ def main():
 
     plane = p.loadURDF("plane.urdf")
 
-    directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    directory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     add_data_path(directory)
 
     table_path = "models/table_collision/table.urdf"

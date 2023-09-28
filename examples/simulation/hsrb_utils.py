@@ -51,7 +51,7 @@ HSR_CARRY_CONFS = {
 
 #####################################
 
-HSRB_URDF = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'models/hsrb_description/robots/hsrb.urdf')
+HSRB_URDF = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'models/hsrb_description/robots/hsrb4s.urdf')
 
 #####################################
 
