@@ -85,8 +85,6 @@ cd /ikfast/
 ./exec_openrave.sh
 ```
 
-8. Modify **(Optional)**
-
 ## License
 
 ## Acknowledgements
