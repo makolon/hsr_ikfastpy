@@ -12,7 +12,7 @@ The Toyota Human Support Robot (HSR) is a versatile robot designed to assist hum
 
 ### Create IK Python Interface
 
-1. Clone this repository
+Clone this repository.
 ```
 git clone --recursive https://github.com/makolon/hsr_ikfast.git
 ```
@@ -51,35 +51,35 @@ python ik_controller.py
 ## Modifying Robot Kinematics with OpenRave
 #### :construction: Since arm_ik.cpp has already been generated using IKFast, you can skip the following steps. Only execute them if you want to regenerate arm_ik.cpp.
 
-2. Build docker **(Optional)**
+1. Build docker **(Optional)**
 ```
 cd docker/docker_openrave
 ./build.sh
 ```
 
-3. Run docker **(Optional)**
+2. Run docker **(Optional)**
 ```
 ./run.sh
 ```
 
-4. Debug the kinematics using OpenRave's viewer **(Optional)**
+3. Debug the kinematics using OpenRave's viewer **(Optional)**
 ```
 openrave wrapper.xml
 ```
 
-5. Check the links in your file **(Optional)**
+4. Check the links in your file **(Optional)**
 ```
 openrave-robot.py hsrb4s.dae --info links
 ```
 
-6. Use OpenRave to re-generate the IKFast C++ code `ikfast61.cpp` **(Optional)**
+5. Use OpenRave to re-generate the IKFast C++ code `ikfast61.cpp` **(Optional)**
 ```
 ./exec_openrave.sh
 ```
 
 You can choose `--iktype` in `exec_openrave.sh` from the list of ik types described in this [document](http://openrave.org/docs/latest_stable/openravepy/ikfast/#ik-types).
 
-7. Execute OpenRave's IKFast C++ executables code generation **(Optional)**
+6. Execute OpenRave's IKFast C++ executables code generation **(Optional)**
 ```
 cd /ikfast/
 ./exec_openrave.sh
