@@ -18,7 +18,7 @@ git clone --recursive https://github.com/makolon/hsr_ikfast.git
 ```
 
 ### Simulation & Real Demo
-In order to run the following demo, you need to build another docker container.
+Build docker container.
 ```
 cd hsr_ikfastpy/docker/docker_hsr
 ./build.sh
@@ -42,7 +42,7 @@ cd ./examples/simulation
 python test_hsr.py 
 ```
 
-Run demo with real HSR.
+Run demo with real HSR. **(Please configure 'hsrrc' appropriately)**
 ```
 cd ./examples/real
 python ik_controller.py
